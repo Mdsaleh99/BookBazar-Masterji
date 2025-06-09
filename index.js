@@ -4,8 +4,10 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 
 
-import userRoutes from "./routes/user.routes.js"
+import userRoutes from "./routes/user.routes.js"     
+import bookRoutes from "./routes/book.routes.js";     
 import { connectToDB } from "./db/db.js"
+import { globalErrorHandler } from "./middlewares/global_error_handler.middlewares.js"
 
 const app = express()
 dotenv.config();
@@ -25,6 +27,7 @@ app.use(cors({
 
 
 app.use("/api/v1/auth", userRoutes)
+app.use("/api/v1/book", bookRoutes)
 
 
 app.get("/", (req, res) => {
@@ -35,3 +38,5 @@ connectToDB()
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
 })
+
+app.use(globalErrorHandler);
