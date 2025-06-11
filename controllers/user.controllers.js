@@ -4,6 +4,8 @@ import { asyncHandler } from "../utils/async-handler.js";
 import { ApiError } from "../utils/api-error.js";
 import { ApiResponse } from "../utils/api-response.js";
 import bcrypt from "bcryptjs";
+import crypto from "crypto"
+import ApiKey from "../models/api_key.models.js";
 
 export const register = asyncHandler(async (req, res) => {
     const { name, email, password } = req.validateBody;
@@ -77,4 +79,29 @@ export const logout = asyncHandler(async (req, res) => {
     res.status(200)
         .clearCookie("token")
         .json(new ApiResponse(200, {}, "User logged out successfully"));
+})
+
+
+export const getMe = asyncHandler((req, res) => {
+    // console.log(req.headers);
+    
+    return res.status(200).json(new ApiResponse(200, {
+        user: req.user
+    }, "User authenticated successfully"))
+})
+
+export const generateApiKey = asyncHandler(async (req, res, next) => {
+    const user = req.user.id
+    const genApiKey = crypto.randomBytes(32).toString("hex")
+
+    const apiKey = await ApiKey.create({
+        userId: user,
+        apiKey: genApiKey
+    })
+
+    if (!apiKey) {
+        return next(new ApiError(403, "Api key genration failed"))
+    }
+
+    return res.status(201).json(new ApiResponse(201, apiKey, "Api key generated successfully"))
 })
