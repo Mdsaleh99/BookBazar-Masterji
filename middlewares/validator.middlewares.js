@@ -13,3 +13,6 @@ export const validate = (schema) => (
         next()
     } 
 )
+
+// https://zod.dev/basics?id=handling-errors
+// To avoid a try/catch block, you can use the .safeParse() method to get back a plain result object containing either the successfully parsed data or a ZodError.

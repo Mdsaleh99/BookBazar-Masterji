@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser"
 
 import userRoutes from "./routes/user.routes.js"     
 import bookRoutes from "./routes/book.routes.js";     
+import reviewRoutes from "./routes/review.routes.js";     
+import orderRoutes from "./routes/order.routes.js";     
 import { connectToDB } from "./db/db.js"
 import { globalErrorHandler } from "./middlewares/global_error_handler.middlewares.js"
 
@@ -13,7 +15,7 @@ const app = express()
 dotenv.config();
 
 const PORT = process.env.PORT || 8080
-
+// https://www.postman.com/mdsaleh24/workspace/mohammed-saleh-masterji-assignment/collection/31971271-a4f31640-90b3-4fe6-975b-dee6dc695ab8?action=share&creator=31971271
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -28,6 +30,8 @@ app.use(cors({
 
 app.use("/api/v1/auth", userRoutes)
 app.use("/api/v1/book", bookRoutes)
+app.use("/api/v1/review", reviewRoutes)
+app.use("/api/v1/order", orderRoutes)
 
 
 app.get("/", (req, res) => {
