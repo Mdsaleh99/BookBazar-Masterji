@@ -1,5 +1,9 @@
 # 📦 Book Bazar – REST APIs
 
+---
+### Postman Link:
+[BookBazar collection](https://www.postman.com/mdsaleh24/workspace/mohammed-saleh-masterji-assignment/collection/31971271-a4f31640-90b3-4fe6-975b-dee6dc695ab8?action=share&creator=31971271)
+
 ## 🔐 Auth Folder
 Authentication and authorization endpoints.
 

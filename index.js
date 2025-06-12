@@ -15,7 +15,6 @@ const app = express()
 dotenv.config();
 
 const PORT = process.env.PORT || 8080
-// https://www.postman.com/mdsaleh24/workspace/mohammed-saleh-masterji-assignment/collection/31971271-a4f31640-90b3-4fe6-975b-dee6dc695ab8?action=share&creator=31971271
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
